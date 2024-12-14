@@ -1,9 +1,9 @@
 import { Bot } from "grammy"
-import { loggingMiddleware } from "./modules/middlewares/logging.middleware"
-import { helpCommand, startCommand } from "./modules/command"
+import { loggingMiddleware } from "../middlewares/logging.middleware"
+import { helpCommand, startCommand } from "./modules/command/clients.command"
 import { User } from "@prisma/client"
 
-export default async function tgController(user: User): Promise<numb> {
+export default async function clientsTgController(user: User): Promise<number> {
     try {
 
         const bot = new Bot(user.telegramToken)
@@ -16,5 +16,6 @@ export default async function tgController(user: User): Promise<numb> {
         return bot.botInfo.id
     } catch (e) {
         console.error('Error init bot:', e)
+        throw e
     }
 } 

@@ -1,9 +1,9 @@
 import { Context } from "grammy";
-import { tgMenu } from "../services/tg.menu.service";
+import { clientsTgMenu } from "../services/clients.tg.menu.service";
 
 export const startCommand = async (ctx: Context) => {
 await ctx.reply("", {
-    reply_markup: tgMenu()
+    reply_markup: clientsTgMenu()
 })
 }
 

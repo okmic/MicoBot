@@ -2,7 +2,8 @@ import fastify, { FastifyInstance } from 'fastify'
 import routes from './routes/index'
 import dotenv from 'dotenv'
 import { errorResponse } from './utils/response.utils'
-import initBots from './telegram'
+import initClientsBots from './telegram/clients'
+import initMainBot from './telegram/main'
 
 dotenv.config()
 
@@ -21,12 +22,19 @@ app.setErrorHandler((error, request, reply) => {
 
 const start = async (): Promise<void> => {
     try {
-        //start bots
+        
         try {
-            initBots()
+            initClientsBots()
         } catch (e) {
             console.error(e)
         }
+
+        try {
+            initMainBot()
+        } catch (e) {
+            console.error(e)
+        }
+
 
         const PORT = Number(process.env.PORT)
         await app.listen({ port: PORT })

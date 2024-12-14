@@ -1,7 +1,7 @@
 import { Keyboard } from "grammy";
 
 
-export function tgMenu() {
+export function clientsTgMenu() {
     try {
 
         return new Keyboard()
