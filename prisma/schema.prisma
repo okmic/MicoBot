@@ -9,8 +9,32 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
+enum TariffStatus {
+  PREMIUM
+  FREE
+}
 
+model User {
+  id                  Int             @id @default(autoincrement()) @unique
+  createdAt           DateTime        @default(now())
+  adminTgLogin        String
+  adminTgChatId       String
+  telegramToken       String
+  telegramBotId       String?
+  isDisabled          Boolean         @default(false)
+  TariffStatus        TariffStatus    @default(FREE)
+  commands            UserTgCommand[]   @relation("User Tg Commands")
+}
+
+model UserTgCommand {
+  id                  Int      @id @default(autoincrement()) @unique
+  userId              Int
+  commandKey          String
+  commandValue        String   @db.Text 
+  createdAt           DateTime @default(now())
+  user                User     @relation("User Tg Commands", fields: [userId], references: [id])
+}
