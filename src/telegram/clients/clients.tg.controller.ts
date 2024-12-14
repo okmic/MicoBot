@@ -1,21 +1,33 @@
-import { Bot } from "grammy"
+import { Api, Bot, RawApi } from "grammy"
 import { loggingMiddleware } from "../middlewares/logging.middleware"
-import { helpCommand, startCommand } from "./modules/command/clients.command"
-import { User } from "@prisma/client"
+import { ClientsBotsContextType, FullBotsType } from "./types"
+import commandsContoller from "./modules/command"
+import { PrismaClient } from "@prisma/client"
 
-export default async function clientsTgController(user: User): Promise<number> {
+
+
+export default async function clientsTgController(bot: Bot<ClientsBotsContextType, Api<RawApi>>, clienInfoBot: FullBotsType): Promise<void> {
     try {
 
-        const bot = new Bot(user.telegramToken)
         bot.use(loggingMiddleware)
-    
-        bot.command('start', startCommand)
-        bot.command('help', helpCommand)
 
+        //commands
+        await commandsContoller(bot, clienInfoBot)
+
+        
         await bot.start()
-        return bot.botInfo.id
+        
+        const prisma = new PrismaClient()
+        await prisma.bots.update({
+            data: {
+                telegramBotId: String(bot.botInfo.id)
+            },
+            where: {
+                id: clienInfoBot.id
+            }
+        })
     } catch (e) {
         console.error('Error init bot:', e)
-        throw e
+        throw e;
     }
-} 
+}

@@ -18,23 +18,32 @@ enum TariffStatus {
   FREE
 }
 
-model User {
+model Bots {
   id                  Int             @id @default(autoincrement()) @unique
   createdAt           DateTime        @default(now())
   adminTgLogin        String
   adminTgChatId       String
-  telegramToken       String
+  telegramToken       String          @unique
   telegramBotId       String?
   isDisabled          Boolean         @default(false)
   TariffStatus        TariffStatus    @default(FREE)
-  commands            UserTgCommand[]   @relation("User Tg Commands")
+  commands            BotTgCommands[] @relation("Bot Tg Commands")
+  menu                BotTgMenu[]    @relation("Bot Tg Menu")
 }
 
-model UserTgCommand {
+model BotTgCommands {
   id                  Int      @id @default(autoincrement()) @unique
-  userId              Int
+  botId               Int
   commandKey          String
-  commandValue        String   @db.Text 
+  commandSctipt       String   @db.Text 
   createdAt           DateTime @default(now())
-  user                User     @relation("User Tg Commands", fields: [userId], references: [id])
+  bot                 Bots     @relation("Bot Tg Commands", fields: [botId], references: [id])
+}
+
+model BotTgMenu {
+  id                  Int      @id @default(autoincrement()) @unique
+  botId               Int
+  menuKey             String
+  createdAt           DateTime @default(now())
+  bot                 Bots     @relation("Bot Tg Menu", fields: [botId], references: [id])
 }

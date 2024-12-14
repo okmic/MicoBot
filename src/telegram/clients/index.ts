@@ -1,29 +1,24 @@
-import { PrismaClient } from "@prisma/client"
+import { Bots, BotTgCommands, BotTgMenu, PrismaClient } from "@prisma/client"
 import tgController from "./clients.tg.controller"
+import { Bot, session } from "grammy"
+import { ClientsBotsContextType, FullBotsType } from "./types"
+import { getManyBotsInfo } from "./modules/utils/bots.db"
 
 export default async function initClientsBots(): Promise<void> {
     try {
-        const prisma = new PrismaClient()
 
-        const users = await prisma.user.findMany({
-            where: {
-                isDisabled: false,
-                TariffStatus: "PREMIUM"
-            }
-        })
+        const bots: FullBotsType[] = await getManyBotsInfo()
 
-        for(let i = 0; i < users.length; i++) {
+        for(let i = 0; i < bots.length; i++) {
             
-            const botId = await tgController(users[i])
+            const bot =  new Bot<ClientsBotsContextType>(bots[i].telegramToken)
 
-            await prisma.user.update({
-                data: {
-                    telegramBotId: String(botId)
-                },
-                where: {
-                    id: users[i].id
-                }
-            })
+            bot.use(session({
+                initial: () => ({[bot.botInfo.id]: {botId: bots[i].id}}) 
+            }))
+            
+            tgController(bot, bots[i])
+            
         }
 
         return
