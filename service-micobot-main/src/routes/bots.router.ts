@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify'
-import { pingController } from '../controllers/ping.controller'
+import { getByIdController,getManyController } from '../controllers/bots.controller'
 
-export default async function pingRouter(fastify: FastifyInstance) {
-    fastify.get('/bots', pingController)
-    fastify.get('/bots/:botId', pingController)
+export default async function botsRouter(fastify: FastifyInstance) {
+    fastify.get('/bots', getManyController)
+    fastify.get('/bots/:botId', getByIdController)
 }
