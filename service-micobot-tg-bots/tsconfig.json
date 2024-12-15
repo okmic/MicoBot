@@ -12,11 +12,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "typeRoots": [
-      "./node_modules/@types",
       "./src"
     ],
-    "types": ["node", "fastify"]
+    "types": ["node"]
   },
-  "include": ["src/**/*", "prisma/**/*"],
+  "include": ["src/**/*", "../prisma/**/*"],
   "exclude": ["node_modules", "build"]
 }

@@ -1,5 +1,5 @@
 import { Api, Bot, RawApi } from "grammy"
-import { ClientsBotsContextType, FullBotsType } from "../../types"
+import { ClientsBotsContextType, FullBotsType } from "../../../../../../global/types/bots"
 
 export const getDynamicClientsCommand = async (bot: Bot<ClientsBotsContextType, Api<RawApi>>, clienInfoBot: FullBotsType) => {
     try {
@@ -7,7 +7,7 @@ export const getDynamicClientsCommand = async (bot: Bot<ClientsBotsContextType, 
         
         for (let i = 0; i < clienInfoBot.commands.length; i++) {
             
-             bot.command(clienInfoBot.commands[i].commandKey, async (ctx) => await eval(clienInfoBot.commands[i].commandSctipt) )
+             bot.command(clienInfoBot.commands[i].commandKey, eval(clienInfoBot.commands[i].commandSctipt) )
             
         }
         

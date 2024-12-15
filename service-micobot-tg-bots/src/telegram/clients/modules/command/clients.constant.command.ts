@@ -1,7 +1,7 @@
-import { Context } from "grammy";
-import { clientsTgMenu } from "../services/clients.tg.menu.service";
-import { ClientsBotsContextType } from "../../types";
-import { getBotInfoById } from "../utils/bots.db";
+import { Context } from "grammy"
+import { clientsTgMenu } from "../services/clients.tg.menu.service"
+import { ClientsBotsContextType } from "../../../../../../global/types/bots"
+import { getBotInfoById } from "../utils/bots.db"
 
 export const startCommand = async (ctx: ClientsBotsContextType) => {
 

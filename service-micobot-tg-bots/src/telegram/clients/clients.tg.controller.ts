@@ -1,6 +1,6 @@
 import { Api, Bot, RawApi } from "grammy"
 import { loggingMiddleware } from "../middlewares/logging.middleware"
-import { ClientsBotsContextType, FullBotsType } from "./types"
+import { ClientsBotsContextType, FullBotsType } from "../../../../global/types/bots"
 import commandsContoller from "./modules/command"
 import { PrismaClient } from "@prisma/client"
 

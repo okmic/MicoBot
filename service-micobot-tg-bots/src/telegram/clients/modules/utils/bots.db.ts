@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client"
-import { FullBotsType } from "../../types"
+import { FullBotsType } from "../../../../../../global/types/bots"
 
 export const getBotInfoById = async (id: number) => {
     const prisma = new PrismaClient()
