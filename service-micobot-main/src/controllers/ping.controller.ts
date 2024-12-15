@@ -6,6 +6,6 @@ export const pingController = async (req: FastifyRequest, reply: FastifyReply): 
   try {
     return successResponse(reply, { msg: "pong"})
   } catch (e) {
-    handleError(reply, {error: e,  errorCode: "fdw32ufj23jf32kf99xkkcbn2915nnxi9dh"})
+    return handleError(reply, {error: e,  errorCode: "fdw32ufj23jf32kf99xkkcbn2915nnxi9dh"})
   }
 }

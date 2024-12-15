@@ -1,8 +1,8 @@
 import fastify, { FastifyInstance } from 'fastify'
 import routes from './routes/index'
 import dotenv from 'dotenv'
-import { errorResponse } from './utils/response.utils'
 import initMainBot from './telegram'
+import { errorResponse } from './utils/response.utils'
 
 dotenv.config()
 
