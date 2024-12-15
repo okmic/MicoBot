@@ -7,3 +7,4 @@ export type FullBotsType = (
     commands: BotTgCommands[]
     menu: BotTgMenu[]
 })
+

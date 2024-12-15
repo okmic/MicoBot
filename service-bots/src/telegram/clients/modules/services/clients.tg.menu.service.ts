@@ -1,5 +1,5 @@
 import { Keyboard } from "grammy"
-import { FullBotsType } from "../../types"
+import { FullBotsType } from "../../../../../../global/types/bots"
 
 export function clientsTgMenu(clientInfoBot: FullBotsType) {
     try {

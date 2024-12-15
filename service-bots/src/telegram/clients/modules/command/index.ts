@@ -1,7 +1,7 @@
 import { Api, Bot, RawApi } from "grammy"
 import {startCommand,helpCommand} from "./clients.constant.command"
 import {getDynamicClientsCommand} from "./clients.dynamic.command"
-import { ClientsBotsContextType, FullBotsType } from "../../types"
+import { ClientsBotsContextType, FullBotsType } from "../../../../../../global/types/bots"
 
 export default async function commandsContoller(bot: Bot<ClientsBotsContextType, Api<RawApi>>, clienInfoBot: FullBotsType) {
     

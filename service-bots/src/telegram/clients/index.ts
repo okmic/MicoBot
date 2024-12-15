@@ -1,7 +1,6 @@
-import { Bots, BotTgCommands, BotTgMenu, PrismaClient } from "@prisma/client"
 import tgController from "./clients.tg.controller"
 import { Bot, session } from "grammy"
-import { ClientsBotsContextType, FullBotsType } from "./types"
+import { ClientsBotsContextType, FullBotsType } from "../../../../global/types/bots"
 import { getManyBotsInfo } from "./modules/utils/bots.db"
 
 export default async function initClientsBots(): Promise<void> {
