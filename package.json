@@ -1,0 +1,18 @@
+{
+  "name": "micobot",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/okmic/MicoBot.git",
+  "author": "okmic",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "main": "cd service-main && pm2 start pm2dev.json",
+    "bots": "cd service-bots && pm2 start pm2dev.json",
+    "dev": "concurrently \"npm run main\" \"npm run bots\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.9"
+  }
+}

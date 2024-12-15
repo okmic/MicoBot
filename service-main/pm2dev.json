@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "main",
+            "script": "npm",
+            "args" : ["run", "dev"]
+        }
+    ]
+}

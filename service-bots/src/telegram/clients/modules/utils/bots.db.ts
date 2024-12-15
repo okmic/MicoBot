@@ -11,6 +11,7 @@ export const getBotInfoById = async (id: number) => {
      return await axiosInstance.get<GlobalAxiosRepsonseType<GlobalAxiosResponeBotsInfoByIdType>>(`/api/app/bots/${id}`)
      .then(r => r.data.values.botInfo)
      .catch(e => {
+        console.error(e)
         throw new Error()
      })
 }
@@ -19,6 +20,7 @@ export const getManyBotsInfo = async () => {
     return await axiosInstance.get<GlobalAxiosRepsonseType<GlobalAxiosResponeBotsInfoType>>(`/api/app/bots`)
     .then(r => r.data.values.botInfo)
     .catch(e => {
-       throw new Error()
+        console.error(e)
+        throw new Error()
     })
 }
