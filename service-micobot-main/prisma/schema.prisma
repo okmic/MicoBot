@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum TariffStatus {
+  PREMIUM
+  FREE
+}
+
+model Bots {
+  id                  Int             @id @default(autoincrement()) @unique
+  createdAt           DateTime        @default(now())
+  adminTgLogin        String
+  adminTgChatId       String
+  telegramToken       String          @unique
+  telegramBotId       String?
+  isDisabled          Boolean         @default(false)
+  TariffStatus        TariffStatus    @default(FREE)
+  commands            BotTgCommands[] @relation("Bot Tg Commands")
+  menu                BotTgMenu[]    @relation("Bot Tg Menu")
+}
+
+model BotTgCommands {
+  id                  Int      @id @default(autoincrement()) @unique
+  botId               Int
+  commandKey          String
+  commandSctipt       String   @db.Text 
+  createdAt           DateTime @default(now())
+  bot                 Bots     @relation("Bot Tg Commands", fields: [botId], references: [id])
+}
+
+model BotTgMenu {
+  id                  Int      @id @default(autoincrement()) @unique
+  botId               Int
+  menuKey             String
+  createdAt           DateTime @default(now())
+  bot                 Bots     @relation("Bot Tg Menu", fields: [botId], references: [id])
+}
+
+model Logs {
+  id                  Int      @id @default(autoincrement()) @unique
+  createdAt           DateTime @default(now())
+  log                 Json
+}
