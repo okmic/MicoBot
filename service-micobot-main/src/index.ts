@@ -19,6 +19,7 @@ app.setErrorHandler((error, request, reply) => {
     return errorResponse(reply, error.message || '=-(( panic error', statusCode)
 })
 
+
 const start = async (): Promise<void> => {
     try {
 
@@ -38,6 +39,7 @@ const start = async (): Promise<void> => {
         } else {
             app.log.info(`MicoBot on ---> ${address}`)
         }
+        
     } catch (err) {
         app.log.error(err)
     }
